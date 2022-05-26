@@ -1,0 +1,9 @@
+INSERT INTO disciplinas (cod_disc, nome_disc, carga_horaria)
+VALUES (100000, "Banco de Dados", 20.0),
+VALUES (110000, "Lógica de Programação", 20.0),
+VALUES (200000, "Leis e Ordem", 20.0),
+VALUES (220000, "Direito Penal", 20.0),
+VALUES (300000, "Genética", 20.0),
+VALUES (330000, "Imunologia", 20.0),
+VALUES (400000, "Fisioterapia do idoso", 20.0),
+VALUES (440000, "Fisioterapia em UTI", 20.0),

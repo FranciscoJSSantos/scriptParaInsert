@@ -1,0 +1,4 @@
+INSERT INTO departamentos (cod_dpto, nome_dpto)
+VALUES (648, "Dep. de Exatas"),
+VALUES (693, "Dep. de Saúde"),
+VALUES (875, "Dep. de Humanas"),
