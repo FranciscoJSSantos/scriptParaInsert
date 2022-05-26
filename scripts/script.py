@@ -34,3 +34,7 @@ def generate_numbers(qtd):
 
 # a = choose_curso()
 # print(a)
+
+for i in range(8):
+  cotista = random.choices([0,1], [0.8, 0.2])
+  print(cotista)
