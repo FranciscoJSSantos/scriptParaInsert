@@ -15,17 +15,6 @@ def departamentos():
     [875, "Dep. de Humanas"]
   ]
   
-def disciplinas():
-  return [
-    [100000, "Banco de Dados",20],
-    [110000, "Lógica de Programação",20],
-    [200000, "Leis e Ordem",20],
-    [220000, "Direito Penal",20],
-    [300000, "Genética",20],  
-    [330000, "Imunologia",20],
-    [400000, "Fisioterapia do idoso",20],
-    [440000, "Fisioterapia em UTI",20],  
-  ]
 
 def choose_curso():
   c = cursos()

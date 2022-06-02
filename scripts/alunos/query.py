@@ -1,6 +1,6 @@
 import save
-from script import cursos, departamentos, disciplinas
-
+from script import generate_numbers
+import pandas as pd
 
 def query_alunos():
   #query final ALUNOS
@@ -10,52 +10,41 @@ def query_alunos():
     for item in data.items():
       f.writelines(f'VALUES ({item[0]}, "{item[1][0]}", "{item[1][1]}", {item[1][2]}, {item[1][3]}),\n')
 
-def query_cursos():
-  # query final CURSOS
-  cs = cursos()
 
-  with open("archives/cursos.txt", "w") as f:
-    f.writelines("INSERT INTO cursos (cod_curso, nom_curso, cod_dpto)\n")
-    for c in cs:
-      f.writelines(f'VALUES ({c[0]}, "{c[1]}", {c[2]}),\n')
-      
-def query_departamentos():
-    #query final DEPARTAMENTOS
-    dp = departamentos()
+# readfile = file1.read()
+
+
+def query_matrizes():
+  matriz = []
+  #query Final matrizes
+  with open('archives/matriculaSoInsert.txt', 'r') as f:
+    for line in f.readlines():
+      nota = generate_numbers(1)
+      new_line = line.replace('(', '').replace(')','').replace(';','').replace('null', str(nota)).replace('\n', '')
+      matriz.append(new_line.rsplit(','))
+  matriz = pd.DataFrame(matriz, columns=['SEMESTRE', 'MAT_ALU', 'COD_DISC', 'NOTA', 'FALTAS'])
+  f.close()
+  with open('archives/matriculasDanilo.txt', 'w') as g:
+    g.writelines("INSERT INTO MATRICULAS (SEMESTRE, MAT_ALU, COD_DISC, NOTA, FALTAS, 'STATUS')")
+    for _, obj in matriz.iterrows():
+      if int(obj[3]) >= 7 and int(obj[4]) <= 2:
+          f.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'A'),\n")
+      else:
+          f.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'R'),\n")
+
     
-    with open("archives/departamentos.txt", "w") as f:
-      f.writelines("INSERT INTO departamentos (cod_dpto, nome_dpto)\n")
-      for d in dp:
-        f.writelines(f'VALUES ({d[0]}, "{d[1]}"),\n')
-
-
-def query_disciplinas():
-    #query final DISCIPLINAS
-    dp = disciplinas()
-    
-    with open("archives/disciplinas.txt", "w") as f:
-      f.writelines("INSERT INTO disciplinas (cod_disc, nome_disc, carga_horaria)\n")
-      for d in dp:
-        f.writelines(f'VALUES ({d[0]}, "{d[1]}", {d[2]}),\n')
-
 
 def clean_inserts():
-  with open("archives/departamentos.txt", 'r+') as f:
-      f.truncate(0)
-  
-  with open("archives/cursos.txt", 'r+') as f:
-    f.truncate(0)
-
   with open("archives/alunos.txt", 'r+') as f:
-    f.truncate(0)
+    f.truncate(-1)
     
     
     
     
+query_matrizes()
+# clean_inserts()
 
-clean_inserts()
-
-query_alunos()
-query_cursos()
-query_departamentos()
-query_disciplinas()
+# query_alunos()
+# query_cursos()
+# query_departamentos()
+# query_disciplinas()
