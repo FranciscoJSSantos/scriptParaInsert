@@ -1,5 +1,5 @@
 import save
-from script import generate_numbers
+import random
 import pandas as pd
 
 def query_alunos():
@@ -19,18 +19,18 @@ def query_matrizes():
   #query Final matrizes
   with open('archives/matriculaSoInsert.txt', 'r') as f:
     for line in f.readlines():
-      nota = generate_numbers(1)
-      new_line = line.replace('(', '').replace(')','').replace(';','').replace('null', str(nota)).replace('\n', '')
+      nota = random.choices([0,1,2,3,4,5,6,7,8,9,10], weights=(1,2,3,4,5,7,10,9,7,5,4))
+      new_line = line.replace('(', '').replace(')','').replace(';','').replace('null', str(nota[0])).replace('\n', '')
       matriz.append(new_line.rsplit(','))
   matriz = pd.DataFrame(matriz, columns=['SEMESTRE', 'MAT_ALU', 'COD_DISC', 'NOTA', 'FALTAS'])
-  f.close()
+
   with open('archives/matriculasDanilo.txt', 'w') as g:
     g.writelines("INSERT INTO MATRICULAS (SEMESTRE, MAT_ALU, COD_DISC, NOTA, FALTAS, 'STATUS')")
     for _, obj in matriz.iterrows():
       if int(obj[3]) >= 7 and int(obj[4]) <= 2:
-          f.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'A'),\n")
+          g.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'A'),\n")
       else:
-          f.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'R'),\n")
+          g.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'R'),\n")
 
     
 

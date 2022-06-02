@@ -38,4 +38,6 @@ def generate_numbers(qtd):
 
 # print(generate_numbers(6))
 
-
+# l = [0,1,2,3,4,5,6,7,8,9,10]
+# for i in range(10):
+#   print(random.choices(l, weights=(1,2,3,4,5,7,10,9,7,5,4)))
