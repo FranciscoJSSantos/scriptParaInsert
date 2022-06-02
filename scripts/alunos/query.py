@@ -25,12 +25,12 @@ def query_matrizes():
   matriz = pd.DataFrame(matriz, columns=['SEMESTRE', 'MAT_ALU', 'COD_DISC', 'NOTA', 'FALTAS'])
 
   with open('archives/matriculasDanilo.txt', 'w') as g:
-    g.writelines("INSERT INTO MATRICULAS (SEMESTRE, MAT_ALU, COD_DISC, NOTA, FALTAS, 'STATUS')")
+    g.writelines("INSERT INTO MATRICULAS (SEMESTRE, MAT_ALU, COD_DISC, NOTA, FALTAS, STATUS)\n")
     for _, obj in matriz.iterrows():
       if int(obj[3]) >= 7 and int(obj[4]) <= 2:
-          g.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'A'),\n")
+          g.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[2]}, {obj[3]}, {obj[4]}, 'A'),\n")
       else:
-          g.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[1]}, {obj[2]}, {obj[3]}, 'R'),\n")
+          g.writelines(f"VALUES ({obj[0]}, {obj[1]}, {obj[2]}, {obj[3]}, {obj[4]}, 'R'),\n")
 
     
 
