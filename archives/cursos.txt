@@ -1,5 +1,0 @@
-INSERT INTO cursos (cod_curso, nom_curso, cod_dpto)
-VALUES (748, "Ciências da Computação", 648),
-VALUES (929, "Direito", 875),
-VALUES (980, "Medicina", 693),
-VALUES (715, "Fisioterapia", 693),

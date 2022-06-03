@@ -1,3 +1,0 @@
-INSERT INTO departamentos (cod_dpto, nom_dpto) VALUES (648, 'Dep. de Exatas');
-INSERT INTO departamentos (cod_dpto, nom_dpto) VALUES (693, 'Dep. de Sa�de');
-INSERT INTO departamentos (cod_dpto, nom_dpto) VALUES (875, 'Dep. de Humanas');
