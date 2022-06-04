@@ -1,6 +1,7 @@
 import save
 import random
 import pandas as pd
+from random_date import random_date
 
 def query_alunos():
   #query final ALUNOS
@@ -51,8 +52,8 @@ def matriz_curso():
     
 
   
-items = matriz_curso()   
-print(items)
+# items = matriz_curso()   
+# print(items)
 def disciplinas():
   aux = []
   with open('archives\InsertDisciplinas.txt', 'r') as f:
@@ -71,8 +72,23 @@ def disciplinas():
       else:
         g.writelines(f'Insert into DISCIPLINAS (COD_DISC,NOM_DISC,CARGA_HORARIA) values ({item[0]}, {item[1]}, {item[2]});\n')
 
-disciplinas()
 
+
+def alunos():
+  lista = []
+  with open('archives/alunos.txt', 'r') as f:
+    for line in f.readlines():
+      new_line = line.replace("Insert into ALUNOS (MAT_ALU,NOM_ALU,DAT_ENTRADA,COD_CURSO) values ('", '').replace("','", ",'").replace(")", "").replace(";", "").replace("\n","")
+      lista.append(new_line.rsplit(','))
+
+  with open('archives/insertAlunos.txt', 'a') as g:
+    for item in lista:
+      dat_entrada = random_date('01/01/2010', '31/12/2020', '%d/%m/%Y')
+      cotista = random.choices(['S','N'], [0.8, 0.2])
+      g.writelines(f"Insert into ALUNOS (MAT_ALU,NOME,DAT_ENTRADA,COD_CURSO,COTISTA) values ({int(item[0])}, {item[1]}, to_date('{dat_entrada}','DD/MM/RR'), '{cotista[0]}');\n")
+
+alunos()
+# disciplinas()
 # matriz_curso()
 # clean_inserts()
 

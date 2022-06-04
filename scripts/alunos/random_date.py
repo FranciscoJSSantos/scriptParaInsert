@@ -18,7 +18,7 @@ def str_time_prop(start, end, time_format, prop):
     return time.strftime(time_format, time.localtime(ptime))
 
 
-def random_date():
-    return str_time_prop("2010-01-01", "2020-12-31", '%Y-%m-%d', random.random())
+def random_date(start, end, format):
+    return str_time_prop(start, end, format, random.random())
     
-# print(random_date("2010-01-01", "2020-12-31", random.random()))
+# print(random_date("2010-01-01", "2020-12-31", '%Y-%m-%d'))
