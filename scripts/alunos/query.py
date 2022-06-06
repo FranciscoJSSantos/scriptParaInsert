@@ -80,14 +80,20 @@ def alunos():
     for line in f.readlines():
       new_line = line.replace("Insert into ALUNOS (MAT_ALU,NOM_ALU,DAT_ENTRADA,COD_CURSO) values ('", '').replace("','", ",'").replace(")", "").replace(";", "").replace("\n","")
       lista.append(new_line.rsplit(','))
-
+  
   with open('archives/insertAlunos.txt', 'a') as g:
     for item in lista:
-      dat_entrada = random_date('01/01/2010', '31/12/2020', '%d/%m/%Y')
-      cotista = random.choices(['S','N'], [0.8, 0.2])
-      g.writelines(f"Insert into ALUNOS (MAT_ALU,NOME,DAT_ENTRADA,COD_CURSO,COTISTA) values ({int(item[0])}, {item[1]}, to_date('{dat_entrada}','DD/MM/RR'), '{cotista[0]}');\n")
+      print(item[4])
+      dat_entrada = random_date('2010/01/01', '2015/12/31', '%Y/%m/%d')
+      cotista = random.choices([0,1], [0.8, 0.2])
+      g.writelines(f"Insert into ALUNOS (MAT_ALU,NOME,DAT_ENTRADA,COD_CURSO,COTISTA) values ({int(item[0])}, {item[1]}, cast('{dat_entrada}' as date), {item[4]}, {cotista[0]});\n")
 
-alunos()
+
+def set_matrizes():
+      with open("archives/")
+
+
+# alunos()
 # disciplinas()
 # matriz_curso()
 # clean_inserts()
